@@ -2,27 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Joy\VoyagerUserSettings;
+namespace Joy\VoyagerDataTypeSettings;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Joy\VoyagerUserSettings\Console\Commands\UserSettings;
-use Joy\VoyagerUserSettings\Models\UserSetting;
-use Joy\VoyagerUserSettings\Models\UserSettingType;
-use Joy\VoyagerUserSettings\Policies\UserSettingPolicy;
+use Joy\VoyagerDataTypeSettings\Console\Commands\DataTypeSettings;
+use Joy\VoyagerDataTypeSettings\Models\DataTypeSetting;
+use Joy\VoyagerDataTypeSettings\Policies\DataTypeSettingPolicy;
 use TCG\Voyager\Facades\Voyager;
 
 /**
- * Class VoyagerUserSettingsServiceProvider
+ * Class VoyagerDataTypeSettingsServiceProvider
  *
  * @category  Package
- * @package   JoyVoyagerUserSettings
+ * @package   JoyVoyagerDataTypeSettings
  * @author    Ramakant Gangwar <gangwar.ramakant@gmail.com>
  * @copyright 2021 Copyright (c) Ramakant Gangwar (https://github.com/rxcod9)
- * @license   http://github.com/rxcod9/joy-voyager-user-settings/blob/main/LICENSE New BSD License
- * @link      https://github.com/rxcod9/joy-voyager-user-settings
+ * @license   http://github.com/rxcod9/joy-voyager-data-type-settings/blob/main/LICENSE New BSD License
+ * @link      https://github.com/rxcod9/joy-voyager-data-type-settings
  */
-class VoyagerUserSettingsServiceProvider extends ServiceProvider
+class VoyagerDataTypeSettingsServiceProvider extends ServiceProvider
 {
     /**
      * The policy mappings for the application.
@@ -30,7 +29,7 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        UserSetting::class => UserSettingPolicy::class,
+        DataTypeSetting::class => DataTypeSettingPolicy::class,
     ];
 
     /**
@@ -40,14 +39,13 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Voyager::useModel('UserSettingType', UserSettingType::class);
-        Voyager::useModel('UserSetting', UserSetting::class);
+        Voyager::useModel('DataTypeSetting', DataTypeSetting::class);
 
-        Voyager::addAction(\Joy\VoyagerUserSettings\Actions\UserSettingsAction::class);
+        Voyager::addAction(\Joy\VoyagerDataTypeSettings\Actions\DataTypeSettingsAction::class);
 
         $this->registerPublishables();
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-voyager-user-settings');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'joy-voyager-data-type-settings');
 
         $this->mapApiRoutes();
 
@@ -55,7 +53,7 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-user-settings');
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'joy-voyager-data-type-settings');
 
         $this->loadAuth();
     }
@@ -84,7 +82,7 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::prefix(config('joy-voyager-user-settings.route_prefix', 'api'))
+        Route::prefix(config('joy-voyager-data-type-settings.route_prefix', 'api'))
             ->middleware('api')
             ->group(__DIR__ . '/../routes/api.php');
     }
@@ -96,7 +94,7 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/voyager-user-settings.php', 'joy-voyager-user-settings');
+        $this->mergeConfigFrom(__DIR__ . '/../config/voyager-data-type-settings.php', 'joy-voyager-data-type-settings');
 
         if ($this->app->runningInConsole()) {
             $this->registerCommands();
@@ -111,26 +109,26 @@ class VoyagerUserSettingsServiceProvider extends ServiceProvider
     protected function registerPublishables(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/voyager-user-settings.php' => config_path('joy-voyager-user-settings.php'),
+            __DIR__ . '/../config/voyager-data-type-settings.php' => config_path('joy-voyager-data-type-settings.php'),
         ], 'config');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-voyager-user-settings'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/joy-voyager-data-type-settings'),
         ], 'views');
 
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-voyager-user-settings'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/joy-voyager-data-type-settings'),
         ], 'translations');
     }
 
     protected function registerCommands(): void
     {
-        $this->app->singleton('command.joy.voyager.user-settings', function () {
-            return new UserSettings();
+        $this->app->singleton('command.joy.voyager.data-type-settings', function () {
+            return new DataTypeSettings();
         });
 
         $this->commands([
-            'command.joy.voyager.user-settings',
+            'command.joy.voyager.data-type-settings',
         ]);
     }
 }

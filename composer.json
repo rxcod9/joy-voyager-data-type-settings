@@ -1,16 +1,16 @@
 {
-    "name": "joy/voyager-user-settings",
-    "description": "This Laravel/Voyager module adds VoyagerUserSettings support to Voyager.",
+    "name": "joy/voyager-data-type-settings",
+    "description": "This Laravel/Voyager module adds VoyagerDataTypeSettings support to Voyager.",
     "keywords": [
         "joy",
-        "user-settings",
-        "voyager-user-settings",
-        "joy-voyager-user-settings",
+        "data-type-settings",
+        "voyager-data-type-settings",
+        "joy-voyager-data-type-settings",
         "cms",
         "voyager",
         "laravel"
     ],
-    "homepage": "https://github.com/rxcod9/joy-voyager-user-settings",
+    "homepage": "https://github.com/rxcod9/joy-voyager-data-type-settings",
     "license": "MIT",
     "authors": [{
         "name": "Ramakant Gangwar",
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Joy\\VoyagerUserSettings\\": "src"
+            "Joy\\VoyagerDataTypeSettings\\": "src"
         },
         "files": [
             "src/helper.php"
@@ -47,13 +47,13 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Joy\\VoyagerUserSettings\\Tests\\": "tests"
+            "Joy\\VoyagerDataTypeSettings\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Joy\\VoyagerUserSettings\\VoyagerUserSettingsServiceProvider"
+                "Joy\\VoyagerDataTypeSettings\\VoyagerDataTypeSettingsServiceProvider"
             ]
         }
     },

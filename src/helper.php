@@ -1,21 +1,21 @@
 <?php
 
-use Joy\VoyagerUserSettings\UserSettings\UserSettings;
-use TCG\Voyager\Contracts\User;
+use Joy\VoyagerDataTypeSettings\DataTypeSettings\DataTypeSettings;
+use TCG\Voyager\Models\DataType;
 
-// if (! function_exists('joyVoyagerUserSettings')) {
+// if (! function_exists('joyVoyagerDataTypeSettings')) {
 //     /**
 //      * Helper
 //      */
-//     function joyVoyagerUserSettings($argument1 = null)
+//     function joyVoyagerDataTypeSettings($argument1 = null)
 //     {
 //         //
 //     }
 // }
 
-if (!function_exists('userSetting')) {
-    function userSetting(User $user, $key, $default = null)
+if (!function_exists('dataTypeSetting')) {
+    function dataTypeSetting(DataType $dataType, $key, $default = null)
     {
-        return UserSettings::userSetting($user, $key, $default);
+        return DataTypeSettings::dataTypeSetting($dataType, $key, $default);
     }
 }

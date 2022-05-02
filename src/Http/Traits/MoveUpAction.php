@@ -1,7 +1,8 @@
 <?php
 
-namespace Joy\VoyagerUserSettings\Http\Traits;
+namespace Joy\VoyagerDataTypeSettings\Http\Traits;
 
+use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 
 trait MoveUpAction
@@ -14,22 +15,22 @@ trait MoveUpAction
     //              | |_) |
     //              |____/
     //
-    //      UserSettings DataTable our Data Type (B)READ
+    //      DataTypeSettings DataTable our Data Type (B)READ
     //
     //****************************************
 
-    public function move_up($id, $sid)
+    public function move_up($id, Request $request)
     {
         // Check permission
         $this->authorize(
             'edit',
-            Voyager::model('UserSetting'),
+            Voyager::model('DataTypeSetting'),
         );
 
-        $user = Voyager::model('User')->findOrFail($id);
+        $slug = $this->getSlug($request);
+        $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
-        $setting     = Voyager::model('UserSetting')->whereUserId((int) $id)->whereUserSettingTypeId((int) $sid)->firstOrFail();
-        $settingType = $setting->userSettingType;
+        $setting     = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->whereId((int) $id)->firstOrFail();
 
         // Check permission
         $this->authorize(
@@ -37,29 +38,30 @@ trait MoveUpAction
             $setting,
         );
 
-        $swapOrder           = $settingType->order;
-        $previousSettingType = Voyager::model('UserSettingType')
+        $swapOrder           = $setting->order;
+        $previousSetting = Voyager::model('DataTypeSetting')
+            ->whereDataTypeSlug($dataType->slug)
             ->where('order', '<', $swapOrder)
-            ->where('group', $setting->userSettingType->group)
+            ->where('group', $setting->group)
             ->orderBy('order', 'DESC')->first();
         $data = [
             'message'    => __('voyager::settings.already_at_top'),
             'alert-type' => 'error',
         ];
 
-        if (isset($previousSettingType->order)) {
-            $settingType->order = $previousSettingType->order;
-            $settingType->save();
-            $previousSettingType->order = $swapOrder;
-            $previousSettingType->save();
+        if (isset($previousSetting->order)) {
+            $setting->order = $previousSetting->order;
+            $setting->save();
+            $previousSetting->order = $swapOrder;
+            $previousSetting->save();
 
             $data = [
-                'message'    => __('voyager::settings.moved_order_up', ['name' => $settingType->display_name]),
+                'message'    => __('voyager::settings.moved_order_up', ['name' => $setting->display_name]),
                 'alert-type' => 'success',
             ];
         }
 
-        request()->session()->flash('user_setting_tab', $settingType->group);
+        request()->session()->flash('data_type_setting_tab', $setting->group);
 
         return back()->with($data);
     }

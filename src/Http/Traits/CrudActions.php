@@ -1,6 +1,6 @@
 <?php
 
-namespace Joy\VoyagerUserSettings\Http\Traits;
+namespace Joy\VoyagerDataTypeSettings\Http\Traits;
 
 trait CrudActions
 {

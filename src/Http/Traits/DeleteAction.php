@@ -1,7 +1,8 @@
 <?php
 
-namespace Joy\VoyagerUserSettings\Http\Traits;
+namespace Joy\VoyagerDataTypeSettings\Http\Traits;
 
+use Illuminate\Http\Request;
 use TCG\Voyager\Facades\Voyager;
 
 trait DeleteAction
@@ -14,25 +15,26 @@ trait DeleteAction
     //              | |_) |
     //              |____/
     //
-    //      UserSettings DataTable our Data Type (B)READ
+    //      DataTypeSettings DataTable our Data Type (B)READ
     //
     //****************************************
 
-    public function delete($id, $sid)
+    public function delete($id, Request $request)
     {
         // Check permission
         $this->authorize(
             'delete',
-            Voyager::model('UserSetting'),
+            Voyager::model('DataTypeSetting'),
         );
 
-        $user = Voyager::model('User')->findOrFail($id);
+        $slug = $this->getSlug($request);
+        $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
-        $setting = Voyager::model('UserSetting')->whereUserId((int) $id)->whereUserSettingTypeId((int) $sid)->firstOrFail();
+        $setting = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->whereId((int) $id)->firstOrFail();
 
-        Voyager::model('UserSetting')->whereUserId($id)->destroy($sid);
+        Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->destroy($id);
 
-        request()->session()->flash('user_setting_tab', $setting->userSettingType->group);
+        request()->session()->flash('data_type_setting_tab', $setting->group);
 
         return back()->with([
             'message'    => __('voyager::settings.successfully_deleted'),
