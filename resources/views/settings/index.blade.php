@@ -226,7 +226,7 @@
     </div>
 
     <div class="page-content settings container-fluid">
-        <form action="{{ route('voyager.users.data-type-settings.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('voyager.' . $dataType->slug . '.data-type-settings.update') }}" method="POST" enctype="multipart/form-data">
             {{ method_field("PUT") }}
             {{ csrf_field() }}
             <input type="hidden" name="data_type_setting_tab" class="data_type_setting_tab" value="{{ $active }}" />
@@ -252,10 +252,10 @@
                                     {{ $settingType->display_name }} @if(config('voyager.show_dev_tips'))<code>dataTypeSetting($dataType, '{{ $settingType->key }}')</code>@endif
                                 </h3>
                                 <div class="panel-actions">
-                                    <a href="{{ route('voyager.users.data-type-settings.move_up', [$settingType->id]) }}">
+                                    <a href="{{ route('voyager.' . $dataType->slug . '.data-type-settings.move_up', [$settingType->id]) }}">
                                         <i class="sort-icons voyager-sort-asc"></i>
                                     </a>
-                                    <a href="{{ route('voyager.users.data-type-settings.move_down', [$settingType->id]) }}">
+                                    <a href="{{ route('voyager.' . $dataType->slug . '.data-type-settings.move_down', [$settingType->id]) }}">
                                         <i class="sort-icons voyager-sort-desc"></i>
                                     </a>
                                     @can('delete', Voyager::model('DataTypeSetting'))
@@ -282,7 +282,7 @@
                                     @elseif($settingType->type == "image" || $settingType->type == "file")
                                         @if(isset( optional($setting)->value ) && !empty( optional($setting)->value ) && Storage::disk(config('voyager.storage.disk'))->exists(optional($setting)->value))
                                             <div class="img_settings_container">
-                                                <a href="{{ route('voyager.users.data-type-settings.delete_value', [$settingType->id]) }}" class="voyager-x delete_value"></a>
+                                                <a href="{{ route('voyager.' . $dataType->slug . '.data-type-settings.delete_value', [$settingType->id]) }}" class="voyager-x delete_value"></a>
                                                 <img src="{{ Storage::disk(config('voyager.storage.disk'))->url(optional($setting)->value) }}" style="width:200px; height:auto; padding:2px; border:1px solid #ddd; margin-bottom:10px;">
                                             </div>
                                             <div class="clearfix"></div>
@@ -293,7 +293,7 @@
                                                     <a class="fileType" target="_blank" href="{{ Storage::disk(config('voyager.storage.disk'))->url($file->download_link) }}">
                                                       {{ $file->original_name }}
                                                     </a>
-                                                    <a href="{{ route('voyager.users.data-type-settings.delete_value', [$settingType->id]) }}" class="voyager-x delete_value"></a>
+                                                    <a href="{{ route('voyager.' . $dataType->slug . '.data-type-settings.delete_value', [$settingType->id]) }}" class="voyager-x delete_value"></a>
                                                  </div>
                                                 @endforeach
                                             @endif
@@ -367,7 +367,7 @@
                 <h3 class="panel-title"><i class="voyager-plus"></i> {{ __('voyager::settings.new') }}</h3>
             </div>
             <div class="panel-body">
-                <form action="{{ route('voyager.users.data-type-settings.store') }}" method="POST">
+                <form action="{{ route('voyager.' . $dataType->slug . '.data-type-settings.store') }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="data_type_setting_tab" class="data_type_setting_tab" value="{{ $active }}" />
                     <div class="col-md-3">
