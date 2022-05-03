@@ -21,7 +21,7 @@ class DataTypeSettings
             return Cache::tags('data-type-settings-' . $dataType->slug)->get($key);
         }
 
-        if (self::$setting_cache === null) {
+        if (self::$setting_cache === null || (self::$setting_cache[$dataType->slug] ?? null) === null) {
             if ($globalCache) {
                 // A key is requested that is not in the cache
                 // this is a good opportunity to update all keys
@@ -32,7 +32,7 @@ class DataTypeSettings
             $settings     = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order')->get();
             foreach ($settings as $setting) {
                 $keys                                     = explode('.', $setting->key);
-                @self::$setting_cache[$keys[0]][$keys[1]] = optional($setting)->value ?? null;
+                @self::$setting_cache[$dataType->slug][$keys[0]][$keys[1]] = optional($setting)->value ?? null;
 
                 if ($globalCache) {
                     Cache::tags('data-type-settings-' . $dataType->slug)->forever($setting->key, $setting->value);
@@ -43,9 +43,9 @@ class DataTypeSettings
         $parts = explode('.', $key);
 
         if (count($parts) == 2) {
-            return @self::$setting_cache[$parts[0]][$parts[1]] ?: $default;
+            return @self::$setting_cache[$dataType->slug][$parts[0]][$parts[1]] ?: $default;
         } else {
-            return @self::$setting_cache[$parts[0]] ?: $default;
+            return @self::$setting_cache[$dataType->slug][$parts[0]] ?: $default;
         }
     }
 }

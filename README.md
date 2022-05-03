@@ -43,7 +43,7 @@ php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\DataT
 
 ## Working Example
 
-You can try laravel demo here [https://joy-voyager.herokuapp.com/admin/users/settings](https://joy-voyager.herokuapp.com/admin/users/settings).
+You can try laravel demo here [https://joy-voyager.herokuapp.com/admin/users/settings](https://joy-voyager.herokuapp.com/admin/users/settings) OR [https://joy-voyager.herokuapp.com/admin/roles/settings](https://joy-voyager.herokuapp.com/admin/roles/settings).
 
 ## Documentation
 
