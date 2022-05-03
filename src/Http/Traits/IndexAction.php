@@ -39,7 +39,7 @@ trait IndexAction
         $settingTypes[__('voyager::settings.group_general')] = [];
         $settings[__('voyager::settings.group_general')]     = [];
         foreach ($types as $d) {
-            $s = $dataTypeSettings->where('data_type_setting_type_id', $d->id)->first();
+            $s = $dataTypeSettings->where('id', $d->id)->first();
             if ($d->group == '' || $d->group == __('voyager::settings.group_general')) {
                 $settingTypes[__('voyager::settings.group_general')][] = $d;
                 $settings[__('voyager::settings.group_general')][]     = $s;
