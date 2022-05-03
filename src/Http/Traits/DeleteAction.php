@@ -32,7 +32,7 @@ trait DeleteAction
 
         $setting = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->whereId((int) $id)->firstOrFail();
 
-        Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->destroy($id);
+        Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->delete($id);
 
         request()->session()->flash('data_type_setting_tab', $setting->group);
 
