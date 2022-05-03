@@ -30,12 +30,10 @@ composer require joy/voyager-data-type-settings
 php artisan vendor:publish --provider="Joy\VoyagerDataTypeSettings\VoyagerDataTypeSettingsServiceProvider" --force
 # 3. Migrate
 php artisan migrate
-# 4. Generate Permissions
-php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\DataTypeSettingsPermissionsTableSeeder"
-# 5. Attach Permissions with roles
-php artisan db:seed --class=PermissionRoleTableSeeder
-# 6. Seed data type setting types
-php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\DataTypeSettingsTableSeeder"
+# 4. Generate Permissions & Attach Permissions with roles
+php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\VoyagerDatabaseSeeder"
+# 5. Seed data type setting types (Optional)
+php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\VoyagerDummyDatabaseSeeder"
 ```
 
 ---
