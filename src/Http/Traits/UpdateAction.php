@@ -20,7 +20,7 @@ trait UpdateAction
     //
     //****************************************
 
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         // Check permission
         $this->authorize(
