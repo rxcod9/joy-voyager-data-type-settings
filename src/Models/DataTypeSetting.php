@@ -4,7 +4,6 @@ namespace Joy\VoyagerDataTypeSettings\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Joy\VoyagerDataTypeSettings\Events\DataTypeSettingUpdated;
-use TCG\Voyager\Facades\Voyager;
 
 class DataTypeSetting extends Model
 {
