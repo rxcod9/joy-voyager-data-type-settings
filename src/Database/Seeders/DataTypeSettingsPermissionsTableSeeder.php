@@ -3,6 +3,7 @@
 namespace Joy\VoyagerDataTypeSettings\Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Models\Permission;
 
 class DataTypeSettingsPermissionsTableSeeder extends Seeder
@@ -12,6 +13,6 @@ class DataTypeSettingsPermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        Permission::generateFor('data_type_settings');
+        Voyager::model('Permission')->generateFor('data_type_settings');
     }
 }
