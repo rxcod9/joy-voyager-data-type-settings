@@ -3,7 +3,6 @@
 namespace Joy\VoyagerDataTypeSettings\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Joy\VoyagerDataTypeSettings\Models\DataTypeSetting;
 use TCG\Voyager\Facades\Voyager;
 
 class DataTypeSettingsTableSeeder extends Seeder
@@ -257,7 +256,7 @@ class DataTypeSettingsTableSeeder extends Seeder
     {
         return Voyager::model('DataTypeSetting')->firstOrNew([
             'data_type_slug' => $slug,
-            'key' => $key,
+            'key'            => $key,
         ]);
     }
 }

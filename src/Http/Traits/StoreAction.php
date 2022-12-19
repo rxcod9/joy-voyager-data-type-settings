@@ -28,7 +28,7 @@ trait StoreAction
             Voyager::model('DataTypeSetting'),
         );
 
-        $slug = $this->getSlug($request);
+        $slug     = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
         $key       = implode('.', [Str::slug($request->input('group')), $request->input('key')]);

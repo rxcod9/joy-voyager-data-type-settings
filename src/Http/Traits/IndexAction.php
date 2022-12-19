@@ -27,11 +27,10 @@ trait IndexAction
             Voyager::model('DataTypeSetting'),
         );
 
-
-        $slug = $this->getSlug($request);
+        $slug     = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
-        $types        = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order', 'ASC')->get();
+        $types            = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order', 'ASC')->get();
         $dataTypeSettings = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order', 'ASC')->get();
 
         $settingTypes                                        = [];

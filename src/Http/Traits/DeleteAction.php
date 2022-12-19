@@ -27,7 +27,7 @@ trait DeleteAction
             Voyager::model('DataTypeSetting'),
         );
 
-        $slug = $this->getSlug($request);
+        $slug     = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
         $setting = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->whereId((int) $id)->firstOrFail();

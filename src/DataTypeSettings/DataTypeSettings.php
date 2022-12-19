@@ -29,9 +29,9 @@ class DataTypeSettings
                 Cache::tags('data-type-settings-' . $dataType->slug)->flush();
             }
 
-            $settings     = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order')->get();
+            $settings = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->orderBy('order')->get();
             foreach ($settings as $setting) {
-                $keys                                     = explode('.', $setting->key);
+                $keys                                                      = explode('.', $setting->key);
                 @self::$setting_cache[$dataType->slug][$keys[0]][$keys[1]] = optional($setting)->value ?? null;
 
                 if ($globalCache) {
