@@ -4,10 +4,10 @@ This [Laravel](https://laravel.com/)/[Voyager](https://voyager.devdojo.com/) mod
 
 By 🐼 [Ramakant Gangwar](https://github.com/rxcod9).
 
-[![Screenshot](https://raw.githubusercontent.com/rxcod9/joy-voyager-data-type-settings/main/cover.jpg)](https://joy-voyager.herokuapp.com/)
+[![Screenshot](https://raw.githubusercontent.com/rxcod9/joy-voyager-data-type-settings/main/cover.jpg)](https://joy-voyager.kodmonk.com/)
 
 [![Latest Version](https://img.shields.io/github/v/release/rxcod9/joy-voyager-data-type-settings?style=flat-square)](https://github.com/rxcod9/joy-voyager-data-type-settings/releases)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rxcod9/joy-voyager-data-type-settings/run-tests?label=tests)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/rxcod9/joy-voyager-data-type-settings/run-tests.yml?branch=main&label=tests)
 [![Total Downloads](https://img.shields.io/packagist/dt/joy/voyager-data-type-settings.svg?style=flat-square)](https://packagist.org/packages/joy/voyager-data-type-settings)
 
 ---
@@ -41,7 +41,7 @@ php artisan db:seed --class="\Joy\VoyagerDataTypeSettings\Database\Seeders\Voyag
 
 ## Working Example
 
-You can try laravel demo here [https://joy-voyager.herokuapp.com/admin/users/settings](https://joy-voyager.herokuapp.com/admin/users/settings) OR [https://joy-voyager.herokuapp.com/admin/roles/settings](https://joy-voyager.herokuapp.com/admin/roles/settings).
+You can try laravel demo here [https://joy-voyager.kodmonk.com/admin/users/settings](https://joy-voyager.kodmonk.com/admin/users/settings) OR [https://joy-voyager.kodmonk.com/admin/roles/settings](https://joy-voyager.kodmonk.com/admin/roles/settings).
 
 ## Documentation
 
