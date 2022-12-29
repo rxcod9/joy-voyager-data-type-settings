@@ -28,7 +28,7 @@ trait UpdateAction
             Voyager::model('DataTypeSetting'),
         );
 
-        $slug = $this->getSlug($request);
+        $slug     = $this->getSlug($request);
         $dataType = Voyager::model('DataType')->whereSlug($slug)->firstOrFail();
 
         $settings = Voyager::model('DataTypeSetting')->whereDataTypeSlug($dataType->slug)->get();
@@ -50,9 +50,9 @@ trait UpdateAction
 
             $key = preg_replace('/^' . Str::slug($setting->group) . './i', '', $setting->key);
 
-            $setting->group = $request->input(str_replace('.', '_', $setting->key) . '_group');
-            $setting->key   = implode('.', [Str::slug($setting->group), $key]);
-            $setting->value = $content;
+            $setting->group          = $request->input(str_replace('.', '_', $setting->key) . '_group');
+            $setting->key            = implode('.', [Str::slug($setting->group), $key]);
+            $setting->value          = $content;
             $setting->data_type_slug = $dataType->slug;
             $setting->save();
         }
